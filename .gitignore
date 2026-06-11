@@ -1,0 +1,19 @@
+# Node
+node_modules/
+dist/
+build/
+.env
+
+# Foundry
+cache/
+out/
+broadcast/
+.foundry/
+
+# Rust / WASM
+target/
+pkg/
+
+# System
+.DS_Store
+Thumbs.db
