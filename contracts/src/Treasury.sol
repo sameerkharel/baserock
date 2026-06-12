@@ -3,12 +3,16 @@ pragma solidity ^0.8.24;
 
 import {BrockToken} from "./BrockToken.sol";
 import {AccessControl} from "openzeppelin-contracts/contracts/access/AccessControl.sol";
+import {SafeERC20} from "openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol";
+import {IERC20} from "openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 
 /**
  * @title Treasury
  * @notice Holds protocol fees, manages dev fund withdrawals, and allows token burns.
  */
 contract Treasury is AccessControl {
+    using SafeERC20 for IERC20;
+
     BrockToken public token;
     
     uint256 public totalBurned;
@@ -37,7 +41,7 @@ contract Treasury is AccessControl {
      * @param amount Amount to withdraw.
      */
     function withdrawDevFund(address to, uint256 amount) external onlyRole(DEFAULT_ADMIN_ROLE) {
-        token.transfer(to, amount);
+        IERC20(address(token)).safeTransfer(to, amount);
         emit DevFundWithdrawn(to, amount);
     }
 }
