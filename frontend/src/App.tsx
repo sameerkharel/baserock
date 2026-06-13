@@ -3,10 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Mine } from './pages/Mine';
 import { Grid } from './pages/Grid';
+import { Profile } from './pages/Profile';
+import { Leaderboard } from './pages/Leaderboard';
 import './styles/design-system.css';
-
-const Profile = () => <div className="container" style={{ paddingTop: '80px' }}><h2>Miner Profile</h2></div>;
-const Leaderboard = () => <div className="container" style={{ paddingTop: '80px' }}><h2>Leaderboard</h2></div>;
 
 export default function App() {
   return (
