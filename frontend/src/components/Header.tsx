@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { Pickaxe, LayoutDashboard, Trophy, User } from 'lucide-react';
+import { Pickaxe, LayoutDashboard, Trophy, User, Coins } from 'lucide-react';
 
 export const Header = () => {
   const location = useLocation();
 
   const navItems = [
     { path: '/mine', label: 'Mining Engine', icon: <Pickaxe size={18} /> },
-    { path: '/', label: 'Grid', icon: <LayoutDashboard size={18} /> }, // Placeholder for step 5
+    { path: '/', label: 'Grid', icon: <LayoutDashboard size={18} /> },
+    { path: '/economy', label: 'Economy', icon: <Coins size={18} /> },
     { path: '/leaderboard', label: 'Leaderboard', icon: <Trophy size={18} /> },
     { path: '/profile', label: 'Profile', icon: <User size={18} /> },
   ];
