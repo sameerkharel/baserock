@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
+import { Mine } from './pages/Mine';
 import './styles/design-system.css';
 
 // Placeholder pages
@@ -17,7 +18,6 @@ const Home = () => (
   </div>
 );
 
-const Mine = () => <div className="container" style={{ paddingTop: '80px' }}><h2>Mining Engine</h2></div>;
 const Profile = () => <div className="container" style={{ paddingTop: '80px' }}><h2>Miner Profile</h2></div>;
 const Leaderboard = () => <div className="container" style={{ paddingTop: '80px' }}><h2>Leaderboard</h2></div>;
 
