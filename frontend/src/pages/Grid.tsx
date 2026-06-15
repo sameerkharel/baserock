@@ -14,7 +14,7 @@ const GRID_SIZE = 50;
 
 // Simple pseudo-random seeded generator for terrain
 const seededRandom = (x: number, y: number) => {
-  const seed = x * 10000 + y + 12345;
+  let seed = x * 10000 + y + 12345;
   const x0 = Math.sin(seed++) * 10000;
   return x0 - Math.floor(x0);
 };
@@ -60,24 +60,27 @@ export const Grid = () => {
 
   return (
     <div className="container" style={{ paddingTop: '40px', paddingBottom: '40px', display: 'flex', flexDirection: 'column', height: 'calc(100vh - 100px)' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-        <div style={{ padding: '12px', background: 'var(--bg-tertiary)', borderRadius: '12px' }}>
-          <Map size={32} color="var(--accent-secondary)" />
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px' }}>
+        <div style={{ padding: '12px', border: '1px solid var(--terminal-green)', background: 'var(--terminal-green-dim)' }}>
+          <Map size={32} color="var(--terminal-green)" />
         </div>
         <div>
-          <h1 style={{ margin: 0, fontSize: '2rem' }}>Territory Grid</h1>
-          <p style={{ margin: '4px 0 0 0', color: 'var(--text-secondary)' }}>Allocate your Mining Power to claim sectors and earn multipliers.</p>
+          <h1 className="glitch-hover" style={{ margin: 0, fontSize: '2rem' }}>SYS_SECTOR_MAP</h1>
+          <p style={{ margin: '4px 0 0 0', color: 'var(--text-secondary)', fontFamily: 'var(--font-main)' }}>&gt; GRID_COORD_SYSTEM ONLINE</p>
         </div>
       </div>
-
-      <div style={{ display: 'flex', gap: '24px', flex: 1, minHeight: 0 }}>
-        {/* Grid Map Area */}
-        <div className="glass-panel" style={{ flex: 1, padding: '16px', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ flex: 1, overflow: 'auto', borderRadius: 'var(--radius-sm)', background: 'var(--bg-primary)' }}>
+      
+      <div style={{ display: 'flex', gap: '32px', alignItems: 'flex-start' }}>
+        {/* The Grid Map */}
+        <div className="glass-panel" style={{ flex: 1, padding: '24px', overflow: 'hidden' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', borderBottom: '1px dashed var(--text-muted)', paddingBottom: '16px' }}>
+            <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--terminal-green)' }}>&gt; TOPOLOGY_VIEW</h3>
+          </div>
+          <div style={{ flex: 1, overflow: 'auto', background: 'var(--bg-primary)', border: '1px solid var(--border-light)' }}>
             <div style={{ 
               display: 'grid', 
-              gridTemplateColumns: \`repeat(\${GRID_SIZE}, 24px)\`,
-              gridTemplateRows: \`repeat(\${GRID_SIZE}, 24px)\`,
+              gridTemplateColumns: `repeat(${GRID_SIZE}, 24px)`,
+              gridTemplateRows: `repeat(${GRID_SIZE}, 24px)`,
               gap: '2px',
               padding: '16px',
               width: 'max-content'
@@ -86,7 +89,7 @@ export const Grid = () => {
                 const isSelected = selectedCell?.x === cell.x && selectedCell?.y === cell.y;
                 return (
                   <div 
-                    key={\`\${cell.x}-\${cell.y}\`}
+                    key={`${cell.x}-${cell.y}`}
                     onClick={() => handleCellClick(cell.x, cell.y)}
                     style={{
                       width: '24px',
@@ -98,13 +101,13 @@ export const Grid = () => {
                       cursor: 'pointer',
                       transform: isSelected ? 'scale(1.1)' : 'scale(1)',
                       zIndex: isSelected ? 10 : 1,
-                      boxShadow: isSelected ? '0 0 10px rgba(255,255,255,0.5)' : 'none',
+                      boxShadow: isSelected ? 'var(--terminal-green-glow)' : 'none',
                       transition: 'transform 0.1s'
                     }}
-                    title={\`Sector (\${cell.x}, \${cell.y}) - \${cell.terrain.name}\`}
+                    title={`SECTOR [${cell.x}, ${cell.y}] - ${cell.terrain.name.toUpperCase()}`}
                   >
                     {cell.owner && <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                       <Flag size={12} color="rgba(255,255,255,0.8)" />
+                       <Flag size={12} color="var(--bg-primary)" />
                     </div>}
                   </div>
                 );
@@ -127,34 +130,18 @@ export const Grid = () => {
 
               <div style={{ padding: '16px', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-sm)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span style={{ color: 'var(--text-secondary)' }}>Terrain</span>
-                  <span style={{ 
-                    color: selectedData.terrain.color, 
-                    fontWeight: 700, 
-                    display: 'flex', alignItems: 'center', gap: '6px' 
-                  }}>
-                    {selectedData.terrain.name}
-                  </span>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: 'var(--text-secondary)' }}>MP Multiplier</span>
-                  <span style={{ color: 'var(--accent-secondary)', fontWeight: 700 }}>
-                    {selectedData.terrain.multiplier}x
-                  </span>
-                </div>
-              </div>
-
-              <div>
-                <h4 style={{ margin: '0 0 8px 0', color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Ownership</h4>
-                {selectedData.owner ? (
-                  <div style={{ padding: '12px', background: 'rgba(99, 102, 241, 0.1)', border: '1px solid var(--accent-glow)', borderRadius: 'var(--radius-sm)', color: 'var(--text-primary)' }}>
-                    Controlled by {selectedData.owner}
+                  <div style={{ background: 'var(--bg-primary)', padding: '16px', border: '1px dashed var(--text-muted)' }}>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '8px' }}>OWNER_ID</p>
+                    {selectedData.owner ? (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <Flag size={16} color="var(--alert-red)" />
+                        <span style={{ color: 'var(--alert-red)', fontWeight: 'bold' }}>CLAIMED</span>
+                      </div>
+                    ) : (
+                      <span style={{ color: 'var(--text-muted)' }}>UNCLAIMED_SECTOR</span>
+                    )}
                   </div>
-                ) : (
-                  <div style={{ padding: '12px', background: 'rgba(255, 255, 255, 0.05)', borderRadius: 'var(--radius-sm)', color: 'var(--text-secondary)' }}>
-                    Unclaimed Territory
-                  </div>
-                )}
+                </div>
               </div>
 
               {isConnected ? (
@@ -168,10 +155,9 @@ export const Grid = () => {
               )}
             </div>
           ) : (
-            <div className="glass-panel" style={{ padding: '32px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '300px' }}>
-              <Info size={48} color="var(--text-muted)" style={{ marginBottom: '16px' }} />
-              <h3 style={{ margin: '0 0 8px 0' }}>No Sector Selected</h3>
-              <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: '0.95rem' }}>Click on a cell in the grid to view its properties and claim it.</p>
+            <div style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '48px 0' }}>
+              <Map size={48} style={{ opacity: 0.2, marginBottom: '16px' }} />
+              <p>&gt; AWAITING_SELECTION...</p>
             </div>
           )}
 
@@ -182,13 +168,12 @@ export const Grid = () => {
                 <span style={{ color: 'var(--text-secondary)' }}>Total MP Earned:</span>
                 <span style={{ fontWeight: 600 }}>0 MP</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--text-secondary)' }}>Sectors Controlled:</span>
-                <span style={{ fontWeight: 600 }}>0</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--text-secondary)' }}>Effective Multiplier:</span>
-                <span style={{ fontWeight: 600, color: 'var(--accent-secondary)' }}>1.0x</span>
+              <div style={{ background: 'var(--bg-primary)', padding: '16px', border: '1px dashed var(--text-muted)', marginBottom: '24px' }}>
+                <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '8px' }}>MULTIPLIER_MODIFIER</p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <TrendingUp size={16} color="var(--hacker-cyan)" />
+                  <span style={{ fontWeight: 700, color: 'var(--hacker-cyan)' }}>+{selectedData ? Math.floor((selectedData.terrain.multiplier - 1) * 100) : 0}% BONUS</span>
+                </div>
               </div>
             </div>
             

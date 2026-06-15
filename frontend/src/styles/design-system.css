@@ -1,133 +1,252 @@
-/* Baserock Design System */
+/* 
+ * BASEROCK TERMINAL DESIGN SYSTEM
+ * Theme: Cyberpunk Wireframe
+ */
 
-:root {
-  /* Core Colors - Dark Mode by Default */
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #13141f;
-  --bg-tertiary: #1e1f30;
+ :root {
+  /* Core Colors */
+  --bg-primary: #020202;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #111111;
   
-  --text-primary: #ffffff;
-  --text-secondary: #a0a5cc;
-  --text-muted: #5e638f;
+  /* Cyberpunk Accents */
+  --terminal-green: #00ff41;
+  --terminal-green-dim: rgba(0, 255, 65, 0.2);
+  --terminal-green-glow: 0 0 10px rgba(0, 255, 65, 0.5);
   
-  /* Brand Accents */
-  --accent-primary: #6366f1; /* Indigo */
-  --accent-secondary: #ec4899; /* Pink */
-  --accent-tertiary: #8b5cf6; /* Violet */
-  --accent-glow: rgba(99, 102, 241, 0.5);
+  --hacker-cyan: #0ff;
+  --hacker-magenta: #f0f;
+  --alert-red: #ff003c;
   
-  /* Glassmorphism */
-  --glass-bg: rgba(30, 31, 48, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  /* Typography */
+  --font-main: 'JetBrains Mono', monospace;
+  --font-display: 'Share Tech Mono', monospace;
   
-  /* Fonts */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  /* Text Colors */
+  --text-primary: #e0e0e0;
+  --text-secondary: #888888;
+  --text-muted: #444444;
+  --text-active: var(--terminal-green);
   
-  /* Layout */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  /* Wireframe borders */
+  --border-light: 1px solid #333;
+  --border-active: 1px solid var(--terminal-green);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  padding: 0;
+  font-family: var(--font-main);
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background-image: 
-    radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.05) 0%, transparent 40%);
-  background-attachment: fixed;
-  min-height: 100vh;
+    linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center center;
 }
 
-/* Glass Card Utilities */
-.glass-panel {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--glass-shadow);
+/* CRT Scanline overlay */
+body::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 999;
+  pointer-events: none;
 }
 
-/* Gradient Text */
-.text-gradient {
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Buttons */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 24px;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: none;
-  font-family: var(--font-sans);
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-tertiary) 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-.btn-secondary {
-  background: var(--bg-tertiary);
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   color: var(--text-primary);
-  border: 1px solid var(--glass-border);
+  margin-top: 0;
 }
 
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.05);
-  transform: translateY(-1px);
-}
-
-/* Animations */
-@keyframes pulse-glow {
-  0% { box-shadow: 0 0 0 0 var(--accent-glow); }
-  70% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Layout Utilities */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
+}
+
+/* Wireframe Panels (Replacing Glassmorphism) */
+.glass-panel {
+  background: var(--bg-secondary);
+  border: var(--border-light);
+  position: relative;
+  border-radius: 0; /* Brutalist */
+}
+
+/* Cyberpunk corner cuts */
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid var(--terminal-green);
+  border-left: 2px solid var(--terminal-green);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.glass-panel::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid var(--terminal-green);
+  border-right: 2px solid var(--terminal-green);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.glass-panel:hover {
+  border-color: #444;
+}
+.glass-panel:hover::before, .glass-panel:hover::after {
+  opacity: 1;
+}
+
+/* Glitch Effect */
+@keyframes glitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
+}
+
+.glitch-hover:hover {
+  animation: glitch 0.2s cubic-bezier(.25, .46, .45, .94) both infinite;
+  color: var(--terminal-green);
+  text-shadow: 2px 0 var(--hacker-magenta), -2px 0 var(--hacker-cyan);
+}
+
+/* Buttons */
+.btn {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--terminal-green-dim);
+  color: var(--terminal-green);
+  border: 1px solid var(--terminal-green);
+}
+
+.btn-primary:hover {
+  background: var(--terminal-green);
+  color: #000;
+  box-shadow: var(--terminal-green-glow);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--text-muted);
+}
+
+.btn-secondary:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+/* Custom terminal scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+  border-left: var(--border-light);
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--terminal-green);
+}
+
+/* Blinking Cursor */
+.cursor-blink::after {
+  content: '█';
+  animation: blink 1s step-end infinite;
+  color: var(--terminal-green);
+  margin-left: 4px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Terminal Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  border-bottom: 1px dashed var(--text-muted);
+  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+td {
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Text Gradients (Cyberpunk style) */
+.text-gradient {
+  background: linear-gradient(90deg, var(--terminal-green), var(--hacker-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.rainbow-hacker {
+  background: linear-gradient(90deg, var(--hacker-cyan), var(--hacker-magenta));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
