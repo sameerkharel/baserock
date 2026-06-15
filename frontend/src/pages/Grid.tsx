@@ -10,7 +10,7 @@ const TERRAIN_TYPES = {
   CAVERN: { name: 'Deep Caverns', multiplier: 2.0, color: '#8b5cf6', bgClass: 'bg-cavern' },
 };
 
-const GRID_SIZE = 50;
+const GRID_SIZE = 10;
 
 // Simple pseudo-random seeded generator for terrain
 const seededRandom = (x: number, y: number) => {
@@ -79,9 +79,9 @@ export const Grid = () => {
           <div style={{ flex: 1, overflow: 'auto', background: 'var(--bg-primary)', border: '1px solid var(--border-light)' }}>
             <div style={{ 
               display: 'grid', 
-              gridTemplateColumns: `repeat(${GRID_SIZE}, 24px)`,
-              gridTemplateRows: `repeat(${GRID_SIZE}, 24px)`,
-              gap: '2px',
+              gridTemplateColumns: `repeat(${GRID_SIZE}, 48px)`,
+              gridTemplateRows: `repeat(${GRID_SIZE}, 48px)`,
+              gap: '4px',
               padding: '16px',
               width: 'max-content'
             }}>
@@ -92,8 +92,8 @@ export const Grid = () => {
                     key={`${cell.x}-${cell.y}`}
                     onClick={() => handleCellClick(cell.x, cell.y)}
                     style={{
-                      width: '24px',
-                      height: '24px',
+                      width: '48px',
+                      height: '48px',
                       backgroundColor: cell.terrain.color,
                       opacity: cell.owner ? 0.9 : 0.4,
                       border: isSelected ? '2px solid white' : cell.owner ? '1px solid rgba(0,0,0,0.5)' : 'none',
@@ -107,7 +107,7 @@ export const Grid = () => {
                     title={`SECTOR [${cell.x}, ${cell.y}] - ${cell.terrain.name.toUpperCase()}`}
                   >
                     {cell.owner && <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                       <Flag size={12} color="var(--bg-primary)" />
+                       <Flag size={20} color="var(--bg-primary)" />
                     </div>}
                   </div>
                 );
