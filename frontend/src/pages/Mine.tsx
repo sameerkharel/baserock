@@ -117,7 +117,6 @@ export const Mine = () => {
       {!isConnected ? (
         <div className="glass-panel" style={{ padding: '48px', textAlign: 'center', border: '1px dashed var(--alert-red)' }}>
           <h2 style={{ color: 'var(--alert-red)' }}>ERR_NO_CONNECTION</h2>
-          <h2 style={{ color: 'var(--alert-red)' }}>ERR_NO_CONNECTION</h2>
           <p style={{ color: 'var(--text-secondary)' }}>&gt; AWAITING_WEB3_PROVIDER...</p>
         </div>
       ) : (
