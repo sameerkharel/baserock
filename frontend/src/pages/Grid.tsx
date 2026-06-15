@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useAccount } from 'wagmi';
-import { Map, Flag, Pickaxe, Zap, Info } from 'lucide-react';
+import { Map, Flag, Pickaxe, Zap, Info, TrendingUp } from 'lucide-react';
 
 // Terrain types
 const TERRAIN_TYPES = {

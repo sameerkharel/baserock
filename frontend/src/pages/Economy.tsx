@@ -72,7 +72,8 @@ export const Economy = () => {
               onClick={() => writeContract({
                 address: REWARD_DISTRIBUTOR_ADDRESS,
                 abi: rewardDistributorABI,
-                functionName: 'claimRewards'
+                functionName: 'batchClaim',
+                args: [mockClaimableRounds.map(r => BigInt(r.id))]
               })}
               disabled={isPending || isConfirming || totalClaimableBROCK === 0}
               style={{ background: 'var(--hacker-magenta)', borderColor: 'var(--hacker-magenta)', color: '#000' }}
@@ -172,5 +173,17 @@ export const Economy = () => {
     </div>
   );
 };
+
+const ContractStatus = ({ name, address, active }: any) => (
+  <div style={{ padding: '16px', border: `1px solid ${active ? 'var(--terminal-green)' : 'var(--text-muted)'}`, background: active ? 'var(--terminal-green-dim)' : 'var(--bg-primary)' }}>
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+      <span style={{ fontWeight: 600, fontSize: '0.9rem', color: active ? 'var(--terminal-green)' : 'var(--text-muted)', fontFamily: 'var(--font-display)' }}>{name}</span>
+      {active ? <Shield size={16} color="var(--terminal-green)" /> : <ShieldAlert size={16} color="var(--text-muted)" />}
+    </div>
+    <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontFamily: 'var(--font-main)' }}>
+      {address === '0x0000000000000000000000000000000000000000' ? '[AWAITING_DEPLOYMENT]' : address}
+    </div>
+  </div>
+);
 
 export default Economy;
