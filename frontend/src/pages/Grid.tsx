@@ -104,7 +104,7 @@ export const Grid = () => {
                       boxShadow: isSelected ? 'var(--terminal-green-glow)' : 'none',
                       transition: 'transform 0.1s'
                     }}
-                    title={`SECTOR [${cell.x}, ${cell.y}] - ${cell.terrain.name.toUpperCase()}`}
+                    title={`SECTOR [${cell.x}, ${cell.y}]\nTERRAIN: ${cell.terrain.name.toUpperCase()}\nBONUS: +${Math.floor((cell.terrain.multiplier - 1) * 100)}%\nYIELD: ~${(10 * cell.terrain.multiplier).toFixed(1)} BROCK/day`}
                   >
                     {cell.owner && <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                        <Flag size={20} color="var(--bg-primary)" />
