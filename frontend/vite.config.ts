@@ -12,6 +12,12 @@ export default defineConfig({
   server: {
     fs: {
       allow: ['..']
+    },
+    hmr: {
+      overlay: false
     }
+  },
+  optimizeDeps: {
+    exclude: ['baserock-mining-engine']
   }
 });
