@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 import { Mine } from './pages/Mine';
 import { Grid } from './pages/Grid';
 import { Profile } from './pages/Profile';
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/economy" element={<Economy />} />
           </Routes>
         </main>
+        <Footer />
       </div>
     </BrowserRouter>
   );
