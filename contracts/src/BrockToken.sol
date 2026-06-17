@@ -15,6 +15,7 @@ contract BrockToken is ERC20, AccessControl {
 
     uint256 public constant MAX_SUPPLY = 21_000_000 * 1e18; // 21 million max supply
 
+    event MaxSupplyReached();
     error MaxSupplyExceeded();
 
     constructor(address defaultAdmin) ERC20("Baserock", "BROCK") {
@@ -31,6 +32,10 @@ contract BrockToken is ERC20, AccessControl {
             revert MaxSupplyExceeded();
         }
         _mint(to, amount);
+        
+        if (totalSupply() == MAX_SUPPLY) {
+            emit MaxSupplyReached();
+        }
     }
 
     /**
