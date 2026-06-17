@@ -63,7 +63,11 @@ export const Header = () => {
         </nav>
       </div>
 
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', border: '1px solid var(--terminal-green)', padding: '6px 12px', background: 'var(--terminal-green-dim)' }}>
+          <div style={{ width: '8px', height: '8px', backgroundColor: 'var(--terminal-green)', boxShadow: '0 0 8px var(--terminal-green)', animation: 'opacity 2s infinite' }} className="cursor-blink" />
+          <span style={{ fontSize: '0.75rem', color: 'var(--terminal-green)', fontWeight: 600, letterSpacing: '1px' }}>SYS_ONLINE</span>
+        </div>
         <ConnectButton 
           showBalance={false}
           chainStatus="icon"
