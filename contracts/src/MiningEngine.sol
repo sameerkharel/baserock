@@ -3,8 +3,13 @@ pragma solidity ^0.8.24;
 
 /**
  * @title MiningEngine
- * @notice Core Proof-of-Work verification contract for Baserock.
- * @dev Issues mining challenges, verifies PoW proofs, tracks Mining Power (MP), and dynamically adjusts difficulty.
+ * @notice Core Proof-of-Useful-Work (PoUW) verification contract for Baserock.
+ * @dev Issues mining challenges, verifies PoUW proofs, and tracks Mining Power (MP).
+ * 
+ * In the Baserock architecture, the Mining Engine serves as the base layer.
+ * Miners submit verifiable proofs of performing external useful computations 
+ * (such as AI inference or ZK-rollups). Each valid proof grants the miner 1 MP (Mining Power).
+ * This MP is then utilized on the separate Territory Grid to claim multiplier sectors.
  */
 contract MiningEngine {
     uint256 public constant ROUND_DURATION = 60 seconds;
@@ -35,9 +40,12 @@ contract MiningEngine {
     }
     
     /**
-     * @notice Submits a Proof-of-Work solution for the current round.
+     * @notice Submits a Proof-of-Useful-Work solution for the current round.
      * @dev Front-running is prevented because the hash depends on `msg.sender`.
-     * @param nonce The nonce that solves the PoW challenge.
+     * Validating this proof simulates verifying an external computational task.
+     * Successfully submitting a proof yields exactly 1 MP (Mining Power) for the sender.
+     * 
+     * @param nonce The nonce that solves the PoUW challenge.
      */
     function submitProof(uint256 nonce) external {
         Round storage currentRound = rounds[currentRoundId];
