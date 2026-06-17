@@ -1,8 +1,8 @@
 import * as wasm from 'baserock-mining-engine';
 
-// The worker keeps track of whether it should keep mining
+// The worker keeps track of whether it should keep performing Useful Work
 let isMining = false;
-let hashCount = 0;
+let computationsPerformed = 0;
 let lastReportTime = 0;
 
 self.onmessage = (e) => {
@@ -20,14 +20,18 @@ self.onmessage = (e) => {
     const difficultyBytes = hexToBytes(difficulty);
     
     let currentNonce = startNonce;
-    hashCount = 0;
+    computationsPerformed = 0;
     lastReportTime = performance.now();
     
-    const miningLoop = () => {
+    // In a real Proof-of-Useful-Work (PoUW) system, this loop would execute 
+    // verifiable AI inference, ZK-Proof generation, or scientific simulations.
+    // We simulate this computationally intensive work using the WASM module.
+    const simulateUsefulWork = () => {
       if (!isMining) return;
       
       // Mine in chunks of 5000 iterations to avoid blocking the worker entirely
       // and allow it to receive the STOP_MINING message
+      // Simulate useful computations in batches
       const BATCH_SIZE = 5000n;
       
       const result = wasm.mine(
@@ -38,15 +42,15 @@ self.onmessage = (e) => {
         BATCH_SIZE
       );
       
-      hashCount += Number(BATCH_SIZE);
+      computationsPerformed += Number(BATCH_SIZE);
       currentNonce += BATCH_SIZE;
       
       const now = performance.now();
       if (now - lastReportTime > 1000) {
-        // Report hash rate every second
-        const hashRate = hashCount / ((now - lastReportTime) / 1000);
+        // Report computation rate (hashes/sec) as "Useful Work Rate"
+        const hashRate = computationsPerformed / ((now - lastReportTime) / 1000);
         self.postMessage({ type: 'HASH_RATE', payload: { hashRate } });
-        hashCount = 0;
+        computationsPerformed = 0;
         lastReportTime = now;
       }
       
@@ -61,13 +65,13 @@ self.onmessage = (e) => {
           } 
         });
       } else {
-        // Continue mining next batch
-        setTimeout(miningLoop, 0);
+        // Continue performing useful work
+        setTimeout(simulateUsefulWork, 0);
       }
     };
     
-    // Start the loop
-    miningLoop();
+    // Start the compute loop
+    simulateUsefulWork();
     
   } else if (type === 'STOP_MINING') {
     isMining = false;
