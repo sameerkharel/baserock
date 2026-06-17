@@ -174,7 +174,13 @@ export const Economy = () => {
   );
 };
 
-const ContractStatus = ({ name, address, active }: any) => (
+interface ContractStatusProps {
+  name: string;
+  address: string;
+  active: boolean;
+}
+
+const ContractStatus = ({ name, address, active }: ContractStatusProps) => (
   <div style={{ padding: '16px', border: `1px solid ${active ? 'var(--terminal-green)' : 'var(--text-muted)'}`, background: active ? 'var(--terminal-green-dim)' : 'var(--bg-primary)' }}>
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
       <span style={{ fontWeight: 600, fontSize: '0.9rem', color: active ? 'var(--terminal-green)' : 'var(--text-muted)', fontFamily: 'var(--font-display)' }}>{name}</span>

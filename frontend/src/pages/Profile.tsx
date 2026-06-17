@@ -129,7 +129,13 @@ export const Profile = () => {
   );
 };
 
-const StatBox = ({ icon, label, value }: any) => (
+interface StatBoxProps {
+  icon: React.ReactNode;
+  label: string;
+  value: string | number;
+}
+
+const StatBox = ({ icon, label, value }: StatBoxProps) => (
   <div style={{ padding: '16px', background: 'var(--bg-primary)', border: '1px solid var(--border-light)' }}>
     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--hacker-cyan)', marginBottom: '12px' }}>
       {icon}
