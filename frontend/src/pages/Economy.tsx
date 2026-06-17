@@ -5,8 +5,8 @@ import { Terminal, Coins, ArrowUpRight, Shield, ShieldAlert, BarChart3, Clock, H
 import { formatEther, formatUnits } from 'viem';
 
 // Replace with deployed addresses on Base Sepolia
-const REWARD_DISTRIBUTOR_ADDRESS = '0x0000000000000000000000000000000000000000';
-const BROCK_TOKEN_ADDRESS = '0x0000000000000000000000000000000000000000';
+const REWARD_DISTRIBUTOR_ADDRESS = '0x2936E3F8a958DbaF7aBDCD809A3301d4CB1b6884';
+const BROCK_TOKEN_ADDRESS = '0xB84431f74b4D3441baC3f766a7273E0210c02C33';
 
 export const Economy = () => {
   const { address, isConnected } = useAccount();
@@ -165,7 +165,7 @@ export const Economy = () => {
             <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <h3 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--hacker-cyan)' }}>&gt; SMART_CONTRACTS</h3>
               <ContractStatus name="MINING_ENGINE" address={REWARD_DISTRIBUTOR_ADDRESS} active={true} />
-              <ContractStatus name="TREASURY" address="0x..." active={false} />
+              <ContractStatus name="TREASURY" address="0x1273E11a46bF29c88025a18e4cE13D4A796F8231" active={true} />
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ import { Square, Cpu, Zap, Hash, Activity } from 'lucide-react';
 import Worker from '../workers/mining.worker?worker';
 
 // Replace with deployed address on Base Sepolia
-const MINING_ENGINE_ADDRESS = '0x0000000000000000000000000000000000000000';
+const MINING_ENGINE_ADDRESS = '0xddfeCeeAAB024B3262991F6411F41B3f38e7d7b3';
 
 export const Mine = () => {
   const { address, isConnected } = useAccount();
