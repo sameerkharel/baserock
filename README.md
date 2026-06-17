@@ -1,31 +1,46 @@
-# BASEROCK ($BROCK)
+# BaseRock: Gamified Proof-of-Useful-Work Mining
 
-> "Mine to the bedrock."
+BaseRock is a revolutionary decentralized protocol on Base Sepolia that transforms cryptocurrency mining from a passive, energy-wasting lottery into a highly competitive, strategic territory control game powered by Proof of Useful Work (PoUW).
 
-A gamified Proof-of-Useful-Compute mining dApp built on Base chain. BASEROCK replaces the gambling dynamics of traditional crypto lotteries with a positive-sum, deterministic reward system where miners allocate real compute power across a strategic resource grid.
+## The Core Concept
 
-## Features
+In traditional Proof-of-Work (like Bitcoin), your computer consumes massive amounts of electricity solving useless math puzzles just to guess a random number. BaseRock flips this model on its head:
 
-- **Real Proof-of-Work**: Browser-based Rust/WASM mining engine ensures miners actually perform cryptographic work.
-- **Resource Allocation Strategy**: Earned Mining Power (MP) is deployed across a 5x5 grid with dynamic yield rates.
-- **Synthetix Reward Distribution**: Gas-efficient O(1) reward calculation for proportional distribution of $BROCK and ETH.
-- **Progression System**: Earn XP, level up ranks, and unlock bonuses.
-- **Crews**: Form mining guilds with up to 50 players to stack multiplier bonuses.
+1. **Proof of Useful Work (PoUW)**: Instead of guessing random numbers, your "Mining Rig" performs valuable real-world computations—such as AI inference, Zero-Knowledge Proof (ZKP) generation, and scientific simulations. 
+2. **Mining Power (MP)**: By completing these useful tasks, your node generates a resource called `Mining Power (MP)`.
+3. **Territory Control (The Grid)**: You use your MP to claim sectors on a 10x10 global map. Different terrains offer different multipliers (e.g., Deep Caverns offer a 2.0x bonus). If someone holds a sector you want, you can use your MP to attack them and steal their territory!
 
-## Project Structure
+## Key Features
 
-- `/contracts`: Foundry project with Solidity smart contracts.
-- `/mining-engine`: Rust to WebAssembly module for keccak256 mining loops.
-- `/frontend`: React + Vite + wagmi UI.
-- `/backend`: Node.js + Express for off-chain progression and coordination.
+- **Cyberpunk Terminal UI**: An immersive, brutalist, hacker-themed interface that makes you feel like a true cypherpunk node operator.
+- **Dynamic Leaderboards**: Track the most powerful miners and Guilds across the network.
+- **Smart Contract Security**: Built on robust Solidity contracts deployed to Base Sepolia.
+- **Treasury Economy**: Claim your `$BROCK` tokens directly from the decentralized reward distributor based on your strategic map placement.
 
-## Development
+## Getting Started
 
 ### Prerequisites
-- Node.js 18+
-- Foundry
-- Rust & Cargo
-- wasm-pack
+- Node.js & npm
+- A Web3 Wallet (MetaMask, Rabby)
+- Base Sepolia testnet ETH
 
-### License
-MIT
+### Running Locally
+```bash
+# Clone the repository
+cd Gamified-Mining-Concept-Improvision/frontend
+
+# Install dependencies
+npm install
+
+# Start the local terminal interface
+npm run dev
+```
+
+## Architecture
+
+- **Frontend**: React, Vite, Wagmi, viem, lucide-react
+- **Smart Contracts**: Foundry, Solidity
+- **Mining Engine**: Rust (WASM) background worker [IN DEVELOPMENT]
+
+---
+*> SYS_END_OF_FILE*
