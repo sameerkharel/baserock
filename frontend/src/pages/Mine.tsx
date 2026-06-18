@@ -14,6 +14,8 @@ export const Mine = () => {
   const [isMining, setIsMining] = useState(false);
   const [hashRate, setHashRate] = useState(0);
   const [foundNonce, setFoundNonce] = useState<string | null>(null);
+  const [logs, setLogs] = useState<string[]>([]);
+  const logsEndRef = useRef<HTMLDivElement>(null);
   
   // Read current Round ID
   const { data: roundId, refetch: refetchRoundId } = useReadContract({
@@ -60,6 +62,26 @@ export const Mine = () => {
     };
   }, []);
 
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval>;
+    if (isMining) {
+      interval = setInterval(() => {
+        const randomHash = Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join('');
+        setLogs(prev => {
+          const newLogs = [...prev, `[TESTING] 0x${randomHash} -> INVALID`];
+          return newLogs.slice(-15); // keep last 15
+        });
+      }, 150);
+    }
+    return () => clearInterval(interval);
+  }, [isMining]);
+
+  useEffect(() => {
+    if (logsEndRef.current) {
+      logsEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [logs]);
+
   const handleStartMining = () => {
     if (!address || !roundData) return;
     
@@ -72,6 +94,7 @@ export const Mine = () => {
     
     setIsMining(true);
     setFoundNonce(null);
+    setLogs(['> INITIALIZING HASHING SEQUENCE...', '> CONNECTING TO TARGET...']);
     
     // Start mining with random nonce
     const startNonce = BigInt(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
@@ -170,6 +193,24 @@ export const Mine = () => {
                 {isConfirmed && <p style={{ margin: '8px 0 0 0', color: 'var(--hacker-cyan)', fontSize: '0.9rem' }}>&gt; TX_CONFIRMED. MP_INCREMENTED.</p>}
               </div>
             )}
+
+            {/* Terminal Logs */}
+            <div style={{
+              marginTop: '16px',
+              height: '180px',
+              background: '#0a0a0a',
+              border: '1px solid var(--text-muted)',
+              padding: '12px',
+              overflowY: 'hidden',
+              fontFamily: 'monospace',
+              fontSize: '0.75rem',
+              color: 'var(--text-secondary)'
+            }}>
+              {logs.length === 0 ? '> WAITING_FOR_INSTRUCTION' : logs.map((log, i) => (
+                <div key={i} style={{ marginBottom: '4px', opacity: i === logs.length - 1 ? 1 : 0.7 }}>{log}</div>
+              ))}
+              <div ref={logsEndRef} />
+            </div>
           </div>
           
           {/* Network Stats */}
