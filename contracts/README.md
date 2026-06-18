@@ -1,66 +1,34 @@
-## Foundry
+# BaseRock Smart Contracts
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This repository contains the core smart contracts for the BaseRock Gamified Mining Protocol, powered by Foundry.
 
-Foundry consists of:
+## Deployed Addresses (Base Mainnet)
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+The protocol is officially live and verified on the Base Mainnet!
 
-## Documentation
+| Contract | Address |
+| --- | --- |
+| **BrockToken ($BROCK)** | `0xB84431f74b4D3441baC3f766a7273E0210c02C33` |
+| **MiningEngine** | `0xddfeCeeAAB024B3262991F6411F41B3f38e7d7b3` |
+| **Treasury** | `0x1273E11a46bF29c88025a18e4cE13D4A796F8231` |
+| **RewardDistributor** | `0x2936E3F8a958DbaF7aBDCD809A3301d4CB1b6884` |
 
-https://book.getfoundry.sh/
+## Architecture
 
-## Usage
+- **`MiningEngine.sol`**: Manages the Proof-of-Useful-Work (PoUW) challenges. Miners submit off-chain proofs to earn Mining Power (MP).
+- **`RewardDistributor.sol`**: Distributes `$BROCK` proportionally based on the MP earned in each round (80% to miners, 20% to Treasury).
+- **`BrockToken.sol`**: Hard-capped ERC-20 reward token (21,000,000 max supply).
+- **`Treasury.sol`**: Secure vault managing protocol taxes and dev funds.
 
-### Build
-
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
+## Development
 
 ```shell
-$ forge fmt
-```
+# Build
+forge build
 
-### Gas Snapshots
+# Test
+forge test
 
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+# Format
+forge fmt
 ```
