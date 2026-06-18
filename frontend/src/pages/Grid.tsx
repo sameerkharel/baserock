@@ -76,7 +76,10 @@ export const Grid = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', borderBottom: '1px dashed var(--text-muted)', paddingBottom: '16px' }}>
             <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--terminal-green)' }}>&gt; TOPOLOGY_VIEW</h3>
           </div>
-          <div style={{ flex: 1, overflow: 'auto', background: 'var(--bg-primary)', border: '1px solid var(--border-light)' }}>
+          <div style={{ flex: 1, overflow: 'hidden', background: 'var(--bg-primary)', border: '1px solid var(--border-light)', position: 'relative' }}>
+            <div className="radar-sweep-container">
+              <div className="radar-sweep"></div>
+            </div>
             <div style={{ 
               display: 'grid', 
               gridTemplateColumns: `repeat(${GRID_SIZE}, 48px)`,
