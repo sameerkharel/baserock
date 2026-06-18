@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAccount } from 'wagmi';
-import { User, Shield, Hash, Pickaxe, Coins } from 'lucide-react';
+import { User, Shield, Hash, Pickaxe, Coins, Zap } from 'lucide-react';
 
 // Format address for display
 const formatAddress = (addr?: string) => {
@@ -59,11 +59,15 @@ export const Profile = () => {
             <div style={{ 
               width: '100px', height: '100px', 
               border: '2px solid var(--hacker-cyan)',
-              background: 'rgba(0, 255, 255, 0.1)',
+              background: 'rgba(0, 255, 255, 0.05)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 0 15px rgba(0, 255, 255, 0.2)'
+              boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)',
+              position: 'relative'
             }}>
-              <User size={48} color="var(--hacker-cyan)" />
+              <Shield size={70} color="var(--hacker-cyan)" strokeWidth={1} />
+              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', marginTop: '-2px' }}>
+                <Zap size={32} color="var(--hacker-cyan)" fill="var(--hacker-cyan)" style={{ filter: 'drop-shadow(0 0 5px var(--hacker-cyan))' }} />
+              </div>
             </div>
             <div>
               <h2 style={{ margin: '0 0 8px 0', fontSize: '1.75rem', fontFamily: 'var(--font-main)' }}>{formatAddress(address)}</h2>
