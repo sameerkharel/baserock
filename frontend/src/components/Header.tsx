@@ -23,9 +23,9 @@ export const Header = () => {
       padding: '12px 24px',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
     }}>
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '100%' }}>
+      <div className="container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '16px' }}>
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
           <Terminal size={24} color="var(--terminal-green)" strokeWidth={2} />
           <span style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-display)', letterSpacing: '2px' }}>
@@ -33,7 +33,7 @@ export const Header = () => {
           </span>
         </Link>
 
-        <nav style={{ display: 'flex', gap: '8px' }}>
+        <nav style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
@@ -61,21 +61,21 @@ export const Header = () => {
             );
           })}
         </nav>
-      </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', border: '1px solid var(--terminal-green)', padding: '6px 12px', background: 'var(--terminal-green-dim)' }}>
-          <div style={{ width: '8px', height: '8px', backgroundColor: 'var(--terminal-green)', boxShadow: '0 0 8px var(--terminal-green)', animation: 'opacity 2s infinite' }} className="cursor-blink" />
-          <span style={{ fontSize: '0.75rem', color: 'var(--terminal-green)', fontWeight: 600, letterSpacing: '1px' }}>SYS_ONLINE</span>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '16px', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', border: '1px solid var(--terminal-green)', padding: '6px 12px', background: 'var(--terminal-green-dim)' }}>
+            <div style={{ width: '8px', height: '8px', backgroundColor: 'var(--terminal-green)', boxShadow: '0 0 8px var(--terminal-green)', animation: 'opacity 2s infinite' }} className="cursor-blink" />
+            <span style={{ fontSize: '0.75rem', color: 'var(--terminal-green)', fontWeight: 600, letterSpacing: '1px' }}>SYS_ONLINE</span>
+          </div>
+          <ConnectButton 
+            showBalance={false}
+            chainStatus="icon"
+            accountStatus={{
+              smallScreen: 'avatar',
+              largeScreen: 'full',
+            }}
+          />
         </div>
-        <ConnectButton 
-          showBalance={false}
-          chainStatus="icon"
-          accountStatus={{
-            smallScreen: 'avatar',
-            largeScreen: 'full',
-          }}
-        />
       </div>
     </header>
   );
