@@ -4,12 +4,12 @@ import { Trophy, Medal, Zap, Users } from 'lucide-react';
 export const Leaderboard = () => {
   // Mock data for top miners
   const topMiners = [
-    { rank: 1, address: '0x1A2B...3C4D', mp: 12500, sectors: 42, guild: 'The Iron Pickaxes', level: 85 },
-    { rank: 2, address: '0x5E6F...7G8H', mp: 11200, sectors: 38, guild: 'Hashrate Kings', level: 72 },
-    { rank: 3, address: '0x9I0J...1K2L', mp: 10800, sectors: 35, guild: 'Base Cartel', level: 68 },
-    { rank: 4, address: '0x3M4N...5O6P', mp: 9500, sectors: 28, guild: null, level: 55 },
-    { rank: 5, address: '0x7Q8R...9S0T', mp: 8900, sectors: 25, guild: 'The Iron Pickaxes', level: 52 },
-    { rank: 6, address: '0x1U2V...3W4X', mp: 8200, sectors: 20, guild: 'Hashrate Kings', level: 48 },
+    { rank: 1, address: '0x858E...1C02', mp: 142000, bounty: '14.2k BROCK', sectors: 42, guild: 'SysAdmins', level: 99 },
+    { rank: 2, address: '0x1A2B...3C4D', mp: 12500, bounty: '1.25k BROCK', sectors: 12, guild: 'The Iron Pickaxes', level: 85 },
+    { rank: 3, address: '0x5E6F...7G8H', mp: 11200, bounty: '1.12k BROCK', sectors: 8, guild: 'Hashrate Kings', level: 72 },
+    { rank: 4, address: '0x9I0J...1K2L', mp: 10800, bounty: '1.08k BROCK', sectors: 6, guild: 'Base Cartel', level: 68 },
+    { rank: 5, address: '0x3M4N...5O6P', mp: 9500, bounty: '950 BROCK', sectors: 2, guild: null, level: 55 },
+    { rank: 6, address: '0x7Q8R...9S0T', mp: 8900, bounty: '890 BROCK', sectors: 2, guild: 'The Iron Pickaxes', level: 52 },
   ];
 
   return (
@@ -32,6 +32,7 @@ export const Leaderboard = () => {
                 <th style={{ padding: '24px 16px' }}>RANK</th>
                 <th style={{ padding: '24px 16px' }}>ADDRESS</th>
                 <th style={{ padding: '24px 16px' }}>GUILD</th>
+                <th style={{ padding: '24px 16px', textAlign: 'right' }}>BOUNTY</th>
                 <th style={{ padding: '24px 16px', textAlign: 'right' }}>MINING_POWER</th>
               </tr>
             </thead>
@@ -46,6 +47,7 @@ export const Leaderboard = () => {
                   </td>
                   <td style={{ padding: '24px 16px', fontFamily: 'var(--font-main)' }}>{miner.address}</td>
                   <td style={{ padding: '24px 16px', color: 'var(--terminal-green)' }}>{miner.guild || '[NONE]'}</td>
+                  <td style={{ padding: '24px 16px', textAlign: 'right', fontWeight: 600, color: 'var(--alert-red)' }}>{miner.bounty}</td>
                   <td style={{ padding: '24px 16px', textAlign: 'right', fontWeight: 700, fontFamily: 'var(--font-main)', color: 'var(--text-primary)' }}>
                     {miner.mp.toLocaleString()} <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>MP</span>
                   </td>
